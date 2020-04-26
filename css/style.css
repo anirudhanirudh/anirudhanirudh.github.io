@@ -1,0 +1,11 @@
+.cold{
+   padding: 0px;
+   width: 100%;
+   border: 0px;
+   margin: 0px;
+}
+
+#issMap {
+   height: 200px;
+   width: 700px;
+ }
