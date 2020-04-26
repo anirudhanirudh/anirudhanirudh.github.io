@@ -262,11 +262,48 @@
 <!--statewise count Close-->
 
 
-<!--footer-->
+<!--2 chart -->
+
 <div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6">
+      <div style="width:500px;height:500px;">
+        <canvas id="myChart" height="350" width="400"></canvas>
+          </div>
+      </div>
+      <div class="col-md-6">
+        <div style="width:500px;height:500px;">
+          <canvas id="myChart1" height="350" width="400"></canvas>
+            </div>
+        </div>
+    </div>
+  </div>
+<!--2 chart close-->
+
+<!--4 chart -->
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6">
+      <div style="width:500px;height:500px;">
+        <canvas id="myChart2" height="350" width="400"></canvas>
+          </div>
+      </div>
+      <div class="col-md-6">
+        <div style="width:500px;height:500px;">
+          <canvas id="myChart3" height="350" width="400"></canvas>
+            </div>
+        </div>
+    </div>
+  </div>
+<!--4 chart close-->
+
+
+<!--footer-->
+<div class="container-fluid" style="margin: 0%;">
   
       <div class="text-center">
-  <footer >
+  <footer style="background-color: grey;" >
     Copyrights &copy; Anirudh_N
   </footer>
   </div>
@@ -287,6 +324,12 @@ crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" 
 crossorigin="anonymous"></script>
 <!--bootstrap link close-->
+
+<!--chart js link-->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
+
+<!--chart js link close-->
 
 
    
@@ -383,13 +426,233 @@ return y1;
 
                          getdata1();
 setInterval(getdata1,1000);
-                         
-                         
-    
-    
+                    
+ </script>
 
-   </script>
+ <!--pie chart script-->
+ <script>
+  $(document).ready(
+      function(){
+          showGraph();
+      }
+  );
+  function showGraph()
+  {
+    $.get("https://corona.lmao.ninja/v2/countries/india?yesterday=false",function(data){
+      console.log(data);  
+      var name = ['Cases','Deaths','Recovered','Active'];
+      var details = [];
+      details.push(data.cases);
+      details.push(data.deaths);
+      details.push(data.recovered);
+      details.push(data.active);
+      console.log(name);
+      console.log(details);
+      var chartdata={
+          labels: name,
+          datasets: [
+          {
+              backgroundColor: ['#95a5a6','#e74c3c','#2ecc71','#3498db'],
+              data: details
+          }
+          ]
+      };
+      var options={
+  title: {
+      display: true,
+      text: 'COVID-19 in India'
+  },
+  elements:{
+  arc: {
+      borderWidth: 0
+  }  
+  }
+      };
+      var graphTarget = $("#myChart");
+  var graph=new Chart(graphTarget,{
+      type: 'pie',
+       data: chartdata,
+       options:options 
+  });
+  
+    });  
+  }
+  
+  </script>
 
+ <!--pie chart script close-->
+
+ <!--bar chart-->
+ <script>
+
+  $(document).ready(
+      function(){
+          showGraph1();
+      }
+  );
+  function showGraph1()
+  {
+    $.get("https://corona.lmao.ninja/v2/countries/india?yesterday=false",function(data){
+      console.log(data); 
+      var name = ['Cases','Deaths','Recovered','Active'];
+      var details = [];
+      details.push(data.cases);
+      details.push(data.deaths);
+      details.push(data.recovered);
+      details.push(data.active);
+     
+      var chartdata={
+          labels: name,
+          datasets: [
+          {
+              backgroundColor: ['#95a5a6','#e74c3c','#2ecc71','#3498db'],
+              data: details
+          }
+          ]
+      };
+      var options={
+        legend:{
+          display: false
+        },
+  title: {
+      display: true,
+      text: 'COVID-19 in India'
+  },
+  elements:{
+  arc: {
+      borderWidth: 0
+  }  
+  }
+      };
+      var graphTarget = $("#myChart1");
+  var graph=new Chart(graphTarget,{
+      type: 'bar',
+       data: chartdata,
+       options:options 
+  });
+  
+    });  
+  }
+  
+  </script>
+ <!--bar chart  close-->
+
+
+ <!--Line chart -->
+ <script>
+  $(document).ready(
+      function(){
+          showGraph2();
+      }
+  );
+  function showGraph2()
+  {
+    $.get("https://corona.lmao.ninja/v2/countries/india?yesterday=false",function(data){
+      console.log(data);  
+      var name = ['Cases','Deaths','Recovered','Active'];
+      var details = [];
+      details.push(data.cases);
+      details.push(data.deaths);
+      details.push(data.recovered);
+      details.push(data.active);
+      console.log(name);
+      console.log(details);
+      var chartdata={
+          labels: name,
+          datasets: [
+          {
+              fill:false,
+              lineTension:0.5,
+              backgroundColor: ['#95a5a6','#e74c3c','#2ecc71','#3498db'],
+              borderColor: "rgba(52,152,219,1.0)",
+             
+              data: details
+          }
+          ]
+      };
+      var options={
+          legend:{
+              display:false
+  
+          },
+  title: {
+      display: true,
+      text: 'COVID-19 in India'
+  },
+  elements:{
+  arc: {
+      borderWidth: 0
+  }  
+  }
+      };
+      var graphTarget = $("#myChart2");
+  var graph=new Chart(graphTarget,{
+      type: 'line',
+       data: chartdata,
+       options:options 
+  });
+  
+    });  
+  }
+  
+  </script>
+ <!--Line chart close-->
+
+<!--radar chart-->
+<script>
+  $(document).ready(
+      function(){
+          showGraph3();
+      }
+  );
+  function showGraph3()
+  {
+    $.get("https://corona.lmao.ninja/v2/countries/india?yesterday=false",function(data){
+      console.log(data);  
+      var name = ['Cases','Deaths','Recovered','Active'];
+      var details = [];
+      details.push(data.cases);
+      details.push(data.deaths);
+      details.push(data.recovered);
+      details.push(data.active);
+      console.log(name);
+      console.log(details);
+      var chartdata={
+          labels: name,
+          datasets: [
+          { 
+              fill:false,
+              backgroundColor: ['#95a5a6','#e74c3c','#2ecc71','#3498db'],
+              data: details
+          }
+          ]
+      };
+      var options={
+          legend:{
+           display:false
+          },
+  title: {
+      display: true,
+      text: 'COVID-19 in India'
+  },
+  elements:{
+  arc: {
+      borderWidth: 0
+  }  
+  }
+      };
+      var graphTarget = $("#myChart3");
+  var graph=new Chart(graphTarget,{
+      type: 'radar',
+       data: chartdata,
+       options:options 
+  });
+  
+    });  
+  }
+  
+  </script>
+<!--radar chart close-->
 
 </body>
 
